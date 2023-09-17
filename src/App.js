@@ -7,6 +7,10 @@ import Confetti from "react-confetti";
 function App() {
   const [dice, setDice] = useState(allNewDice());
   const [tenzies, setTenzies] = useState(false);
+  const [bestScore, setBestScore] = useState(
+    JSON.parse(localStorage.getItem("bestScore")) || null
+  );
+  const [count, setCount] = useState(1);
 
   function allNewDice() {
     const newDice = [];
@@ -37,6 +41,20 @@ function App() {
     );
   }
 
+  //compare count with bestScore
+  function checkScore() {
+    if (!bestScore) {
+      setBestScore(count);
+      localStorage.setItem("bestScore", JSON.stringify(bestScore));
+    } else if (count < bestScore) {
+      setBestScore(count);
+      localStorage.setItem("bestScore", JSON.stringify(bestScore));
+    } else {
+      return;
+    }
+  }
+
+  //add count
   function rollDice() {
     if (!tenzies) {
       setDice((prevDice) =>
@@ -44,9 +62,12 @@ function App() {
           return die.isHeld ? die : generateNewDice();
         })
       );
+      setCount((prevCount) => prevCount + 1);
     } else {
+      checkScore();
       setTenzies(false);
       setDice(allNewDice());
+      setCount(0);
     }
   }
 
@@ -83,6 +104,10 @@ function App() {
       <p className="instructions">
         Roll until all dice are the same. Click each die to freeze it at its
         current value between rolls
+      </p>
+      <p className="bestScore">Best Score: {bestScore}</p>
+      <p className="count">
+        {count} {count === 1 ? "roll" : "rolls"}
       </p>
       <div className="dice-container">{diceElements}</div>
       <button className="roll-dice" onClick={rollDice}>
