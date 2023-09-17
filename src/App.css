@@ -41,6 +41,14 @@ main {
   text-align: center;
 }
 
+.best-score,
+.count {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 5px;
+  color: #7664e9;
+}
+
 .dice-container {
   display: grid;
   grid-template: auto auto / repeat(5, 1fr);

@@ -105,7 +105,7 @@ function App() {
         Roll until all dice are the same. Click each die to freeze it at its
         current value between rolls
       </p>
-      <p className="bestScore">Best Score: {bestScore}</p>
+      <p className="best-score">Best Score: {bestScore}</p>
       <p className="count">
         {count} {count === 1 ? "roll" : "rolls"}
       </p>
