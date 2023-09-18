@@ -67,7 +67,7 @@ function App() {
       checkScore();
       setTenzies(false);
       setDice(allNewDice());
-      setCount(0);
+      setCount(1);
     }
   }
 
